@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Focus</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./icon/android-chrome-512x512.png" type="image/x-icon">
+</head>
+<body>
+
+<header id="top">
+    <h3>Daily Focus</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+    </svg>
+</header>
+
+<div id="page">
+    <div id="row">
+        <aside class="bar">
+            <div id="barlist">
+                <div class="taskorhabit field_txt">
+                    <div class="field active" data-mode="task">Task</div>
+                    <div class="field" data-mode="habit">Habits</div>
+                    <div class="field" data-mode="calendar">Calendar</div>
+                </div>
+                <div class="mode mode-task">
+                    <p class="title">Categories</p>
+                    <ul>
+                        <li class="category">Daily Tasks</li> 
+                        <li class="add"> 
+                            <svg id="addCat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14"/> <path d="M8 
+                                4v8M4 8h8" stroke="currentColor" stroke-width="1.5"/> </svg> New Category 
+                        </li> 
+                    </ul>     
+                </div>
+                <div class="mode mode-habit hidden">
+                    <p class="title">My Habits</p>
+                    <div class="view-toggle">
+                        <button id="habitDailyFilter" class="mini-btn active">Daily</button>
+                        <button id="habitWeeklyFilter" class="mini-btn">Weekly</button>
+                    </div>
+                    <ul id="habitSidebarList" class="habit-feed">
+                        <li class="add"> 
+                            <svg id="addHabit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14"/> 
+                                <path d="M8 4v8M4 8h8" stroke="currentColor" stroke-width="1.5"/> 
+                            </svg> 
+                            <span>New Habit</span> </li> 
+                    </ul>
+                </div>
+
+                
+
+                <div class="mode mode-calendar hidden">
+                    <p class="title">Incoming Events</p>
+                    <div class="view-toggle">
+                        <button id="toggleWeek" class="mini-btn">Week</button>
+                        <button id="toggleMonth" class="mini-btn active">Month</button>
+                    </div>
+                    <ul id="eventSidebarList" class="event-feed"></ul>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <main class="right">
+            <div id="boardsContainer" class="boards-dashboard">
+                <div class="dashboard-header">
+                    <h2 id="categoryDisplayTitle" contenteditable="true" spellcheck="false">My Boards</h2>
+                </div>
+                <div id="boardsList" class="boards-grid">
+                    <div class="add-board-card" id="addNewBoardBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
+                        <span>New Board</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="kanbanView" class="hidden">
+                <div id="taskHeader" class="head">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button id="backToBoards" class="mini-btn" style="cursor:pointer; border:none; background:none;">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg>
+                        </button>
+                        <h1 class="category_name" id="boardTitle" contenteditable="true">Board Name</h1>
+                    </div>
+                </div>
+
+                <div id="taskMain" class="taskStates">
+                    <div class="addStateCondition" onclick="todo.addNewColumnPrompt()">
+                        <div class="taskCondition">New List</div>
+                        <div class="add-task-trigger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="habitView" class="hidden">
+                <div class="head">
+                    <h1>Consistency Tracker</h1>
+                    <p>Your progress over the last 7 days</p>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <span id="completionRate">0%</span>
+                        <label>Today's Completion</label>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <div id="habitChart" class="habit-chart"></div>
+                </div>
+            </div>
+
+            <div id="calendarView" class="hidden">
+                <div class="calendar-header">
+                    <button id="prevMonth" class="nav-btn">&lt;</button>
+                    <h2 id="calendarTitle">Month Year</h2>
+                    <button id="nextMonth" class="nav-btn">&gt;</button>
+                </div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div id="customModal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Title</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <input type="text" id="modalInput" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div class="modal-footer">
+            <button id="modalCancel" class="mini-btn">Cancel</button>
+            <button id="modalConfirm" class="mini-btn active">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<div id="taskModal" class="modal hidden">
+    <div class="modal-content task-modal-wide">
+        <div class="modal-header">
+            <input type="text" id="modalTaskTitle" class="inline-edit-title" placeholder="Task Name">
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="modal-section"><label>Deadline</label><input type="date" id="modalDeadline"></div>
+            <div class="modal-section"><label>Description</label><textarea id="modalDesc"></textarea></div>
+            <div class="modal-section"><label>Label</label><input type="text" id="modalLabel"></div>
+            <div class="modal-section"><label>Checklist</label><div id="modalSubtasks"></div><button class="mini-btn" id="addSubtask">+ Add Item</button></div>
+        </div>
+        <div class="modal-footer">
+            <button id="modalDelete" class="mini-btn danger">Delete Task</button>
+            <div class="footer-right">
+                <button id="modalCancelTask" class="mini-btn">Cancel</button>
+                <button id="modalConfirmTask" class="mini-btn active">Save Task</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmModal" class="modal hidden">
+    <div class="modal-content confirm-modal-small">
+        <div class="modal-header">
+            <h3 id="confirmTitle">Confirm Action</h3>
+        </div>
+        <div class="modal-body">
+            <p id="confirmMessage">Are you sure?</p>
+        </div>
+        <div class="modal-footer">
+            <button id="confirmCancel" class="mini-btn">Cancel</button>
+            <button id="confirmExecute" class="mini-btn danger">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
+
